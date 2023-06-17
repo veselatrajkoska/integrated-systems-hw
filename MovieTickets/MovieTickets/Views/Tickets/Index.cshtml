@@ -1,0 +1,41 @@
+﻿@model List<MovieTickets.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
+    <div class="m-3">
+        <a class="btn btn-success" asp-controller="Tickets" asp-action="Create">Add new ticket</a>
+    </div>
+
+    @for (int i = 0; i < Model.Count; i++) 
+    {
+        var item = Model[i];
+        if(i % 3 == 0)
+        {
+            @:<div class="row">
+        }
+
+        <div class="col">
+
+            <div class="card" style="width: 18rem; margin-right: 10px;">
+                <img src="@item.movieImage" class="card-img-top" alt="Movie ticket">
+                <div class="card-body">
+                    <h5 class="card-title">@item.movie</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@item.dateTime</h6>
+                    <p class="card-text">@item.description</p>
+                    <a asp-action="Edit" asp-route-id="@item.TicketId" class="btn btn-primary">Edit</a>
+                    <a class="btn btn-success" href="/Products/AddToCart?ticketId=@item.TicketId&cartId=1">Buy</a>
+                </div>
+            </div>
+        </div>
+
+        if(i % 3 == 0)
+        {
+            @:</div>
+        }
+    }
+
+</div>
